@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: onpremise-install-supporter
+
+  cloud:
+    openfeign:
+      client:
+        config:
+          dockerHubFeignClient:
+            logger-level: FULL
+
+logging:
+  level:
+    jonghyeok.onpremiseinstallsupporter: DEBUG
