@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableFeignClients(basePackageClasses = DockerImageMetaDataFeignClient.class) // 해당 클래스의 패키지만 스캔
+@EnableFeignClients(basePackageClasses = DockerGithubClient.class) // 해당 클래스의 패키지만 스캔
 public class FeignClientConfig {
 
     @Bean

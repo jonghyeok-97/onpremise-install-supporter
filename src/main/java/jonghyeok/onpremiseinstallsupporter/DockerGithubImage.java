@@ -2,7 +2,7 @@ package jonghyeok.onpremiseinstallsupporter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record DockerImageMetaData(
+public record DockerGithubImage(
         String name,
         String path,
         String sha,
