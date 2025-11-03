@@ -1,7 +1,5 @@
-package jonghyeok.onpremiseinstallsupporter.learn;
+package jonghyeok.onpremiseinstallsupporter;
 
-import jonghyeok.onpremiseinstallsupporter.DockerGithubImage;
-import jonghyeok.onpremiseinstallsupporter.DockerGithubClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

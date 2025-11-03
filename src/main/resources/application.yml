@@ -12,3 +12,7 @@ spring:
 logging:
   level:
     jonghyeok.onpremiseinstallsupporter: DEBUG
+
+image:
+  path:
+    file: ./images  # /app/data
