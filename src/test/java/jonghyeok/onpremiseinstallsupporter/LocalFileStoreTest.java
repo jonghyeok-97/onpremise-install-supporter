@@ -35,10 +35,10 @@ class LocalFileStoreTest {
     void storeFailWhenPathIsNull() {
         LocalFileStore localFileStore = new LocalFileStore(null);
 
-        List<DockerGithubImage> githubImages = List.of(
-                new DockerGithubImage("Nginx", "path", "", "", "", "", "", "", "", null),
-                new DockerGithubImage("Redis", "path", "", "", "", "", "", "", "", null),
-                new DockerGithubImage("Tomcat", "path", "", "", "", "", "", "", "", null)
+        List<DockerImage> githubImages = List.of(
+                new DockerImage("Nginx", "path", "", "", "", "", "", "", "", null),
+                new DockerImage("Redis", "path", "", "", "", "", "", "", "", null),
+                new DockerImage("Tomcat", "path", "", "", "", "", "", "", "", null)
         );
 
         assertThatThrownBy(() -> localFileStore.store(githubImages))
@@ -50,10 +50,10 @@ class LocalFileStoreTest {
     void storeFailWhenPathIsBlank(String filePath) {
         LocalFileStore localFileStore = new LocalFileStore(filePath);
 
-        List<DockerGithubImage> githubImages = List.of(
-                new DockerGithubImage("Nginx", "path", "", "", "", "", "", "", "", null),
-                new DockerGithubImage("Redis", "path", "", "", "", "", "", "", "", null),
-                new DockerGithubImage("Tomcat", "path", "", "", "", "", "", "", "", null)
+        List<DockerImage> githubImages = List.of(
+                new DockerImage("Nginx", "path", "", "", "", "", "", "", "", null),
+                new DockerImage("Redis", "path", "", "", "", "", "", "", "", null),
+                new DockerImage("Tomcat", "path", "", "", "", "", "", "", "", null)
         );
 
         assertThatThrownBy(() -> localFileStore.store(githubImages))
@@ -64,10 +64,10 @@ class LocalFileStoreTest {
     void storeImageNames() throws IOException {
         LocalFileStore localFileStore = new LocalFileStore(filePath.toString());
 
-        List<DockerGithubImage> githubImages = List.of(
-                new DockerGithubImage("Nginx", "path", "", "", "", "", "", "", "", null),
-                new DockerGithubImage("Redis", "path", "", "", "", "", "", "", "", null),
-                new DockerGithubImage("Tomcats", "path", "", "", "", "", "", "", "", null)
+        List<DockerImage> githubImages = List.of(
+                new DockerImage("Nginx", "path", "", "", "", "", "", "", "", null),
+                new DockerImage("Redis", "path", "", "", "", "", "", "", "", null),
+                new DockerImage("Tomcats", "path", "", "", "", "", "", "", "", null)
         );
 
         localFileStore.store(githubImages);

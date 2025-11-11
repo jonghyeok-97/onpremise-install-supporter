@@ -7,7 +7,7 @@ spring:
       client:
         config:
           dockerHubFeignClient:
-            logger-level: FULL
+            loggerLevel: FULL
 
 logging:
   level:
@@ -16,3 +16,6 @@ logging:
 image:
   path:
     file: ./images  # /app/data
+
+github:
+  url: https://api.github.com

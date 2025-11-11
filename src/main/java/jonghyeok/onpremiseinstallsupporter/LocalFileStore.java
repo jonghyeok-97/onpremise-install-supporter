@@ -22,13 +22,13 @@ public class LocalFileStore implements DockerImageStore {
     }
 
     @Override
-    public void store(List<DockerGithubImage> images) throws IOException {
+    public void store(List<DockerImage> images) throws IOException {
         if(!StringUtils.hasText(filePath)) {
             throw new IllegalArgumentException("image.path.file should has text");
         }
 
         List<String> imageNames = images.stream()
-                .map(DockerGithubImage::name)
+                .map(DockerImage::name)
                 .toList();
 
         FileSystemResource fileSystemResource = new FileSystemResource(filePath);

@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface DockerImageStore {
 
-    void store(List<DockerGithubImage> images) throws IOException;
+    void store(List<DockerImage> images) throws IOException;
 }
