@@ -1,0 +1,15 @@
+#image:
+#  path:
+#    file: ./  # /app/data
+
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            loggerLevel: NONE
+
+logging:
+  level:
+    jonghyeok.onpremiseinstallsupporter: INFO

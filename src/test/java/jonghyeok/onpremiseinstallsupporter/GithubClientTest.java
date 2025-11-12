@@ -1,28 +1,33 @@
 package jonghyeok.onpremiseinstallsupporter;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class DockerGithubClientTest {
+@ActiveProfiles(value = "test")
+public class GithubClientTest {
+    Logger logger = LoggerFactory.getLogger(GithubClientTest.class);
+
     @Autowired
-    private DockerGithubClient imageMetaDataClient;
+    private GithubClient githubClient;
 
     @Test
     void getAllDockerImagesFromGithub() {
-        List<DockerGithubImage> githubImages = imageMetaDataClient.getAllDockerImages();
+        List<DockerImage> githubImages = githubClient.getAllDockerImages();
 
         assertThat(githubImages).isNotEmpty();
-        
-        System.out.println("result size : " + githubImages.size());
+
+        logger.info("이미지 개수 : {}", githubImages.size());
         githubImages.forEach(each -> {
-            System.out.println(each);
-            System.out.println();
+            logger.debug(each.toString());
         });
     }
 }

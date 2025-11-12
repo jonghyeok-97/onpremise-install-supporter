@@ -11,6 +11,8 @@ import java.util.List;
 @FeignClient(name = "dockerHubFeignClient", url = "${github.url}")
 public interface GithubClient {
 
-    @GetMapping(path = "/repos/docker-library/official-images/contents/library", headers = "Accept=application/vnd.github.v3+json")
+    String DOCKER_REPO_URL = "/repos/docker-library/official-images/contents/library";
+
+    @GetMapping(path = DOCKER_REPO_URL, headers = "Accept=application/vnd.github.v3+json")
     List<DockerImage> getAllDockerImages();
 }
