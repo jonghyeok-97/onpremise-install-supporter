@@ -1,14 +1,13 @@
 package jonghyeok.onpremiseinstallsupporter;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.http.Fault;
 import feign.RetryableException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
@@ -16,10 +15,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static jonghyeok.onpremiseinstallsupporter.FeignClientConfig.*;
+import static jonghyeok.onpremiseinstallsupporter.GlobalFeignClientConfig.FEIGN_RETRY_MAX_ATTEMPTS;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -29,7 +29,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @TestPropertySource(properties = "github.url=http://localhost:${wiremock.server.port}")
 public class GithubClientMockTest {
     static final int RANDOM_PORT = 0;
-    private static final Logger log = LoggerFactory.getLogger(GithubClientMockTest.class);
 
     @Autowired
     GithubClient githubClient;
@@ -55,13 +54,13 @@ public class GithubClientMockTest {
     }
 
     @Test
-    @DisplayName("FeignClient는 Retry-After 헤더의 값을 엄격하게 지키며 재시도한다")
+    @DisplayName("전역 FeignClient는 Retry-After 헤더의 값을 엄격하게 지킨다")
     void strictRetry() {
-        Duration strictRetryAfterSeconds = Duration.ofSeconds(3);
+        Duration strictRetryAfterSeconds = Duration.ofSeconds(4);
         stubFor(get(GithubClient.DOCKER_REPO_URL)
                 .willReturn(aResponse()
                         .withStatus(429)
-                        .withHeader(HttpHeaders.RETRY_AFTER, String.valueOf(strictRetryAfterSeconds.getSeconds()))));  // 1초
+                        .withHeader(HttpHeaders.RETRY_AFTER, String.valueOf(strictRetryAfterSeconds.getSeconds()))));
 
         long start = System.currentTimeMillis();
         assertThatThrownBy(() -> githubClient.getAllDockerImages())
@@ -70,5 +69,23 @@ public class GithubClientMockTest {
         Duration actualTime = Duration.ofMillis(System.currentTimeMillis() - start);
         Duration expectedTime = strictRetryAfterSeconds.multipliedBy(FEIGN_RETRY_MAX_ATTEMPTS - 1);
         assertThat(actualTime).isGreaterThanOrEqualTo(expectedTime);
+    }
+
+    @Test
+    @DisplayName("IOException 발생 시 설정된 횟수만큼 재시도한다.")
+    void retryOnIOException() {
+        stubFor(get(GithubClient.DOCKER_REPO_URL)
+                .willReturn(aResponse()
+                        .withFault(Fault.CONNECTION_RESET_BY_PEER)));
+
+        assertThatThrownBy(() -> githubClient.getAllDockerImages())
+                .isInstanceOf(RetryableException.class)
+                .hasCauseInstanceOf(IOException.class);
+
+        /**
+         * https://github.com/wiremock/wiremock/issues/1789
+         * WireMock 에서 사용중인 ApacheHttpClient 가 IOException 발생 시, 기본적으로 1회 재시도 시도하기 때문에 *2 를 함.
+         */
+        verify(FEIGN_RETRY_MAX_ATTEMPTS * 2, getRequestedFor(urlEqualTo(GithubClient.DOCKER_REPO_URL)));
     }
 }
