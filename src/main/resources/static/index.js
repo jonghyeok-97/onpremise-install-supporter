@@ -160,6 +160,42 @@ window.addEventListener('beforeunload', () => {
     }
 });
 
+// docker Image 가져오기
+document.addEventListener('DOMContentLoaded', async () => {
+    const selectElement = document.getElementById('dockerImage');
+
+    try {
+        const response = await fetch('/api/docker/images', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const images = await response.json();
+
+        if (images.length === 0) {
+            addLog('설치 가능한 기술이 없습니다.', 'warning');
+            return;
+        }
+
+        // 셀렉트 박스에 추가
+        images.forEach(image => {
+            const option = document.createElement('option');
+            option.value = image.name;
+            option.textContent = image.name;
+            selectElement.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Docker 이미지 조회 실패:', error);
+        addLog(`에러: ${error.message}`, 'error');
+    }
+})
+
 // 데모를 위한 시뮬레이션 (실제 서버 없을 때)
 // 아래 코드는 서버가 준비되면 삭제하세요
 function simulateSSE(imageName) {
