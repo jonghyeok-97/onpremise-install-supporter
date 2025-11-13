@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker 이미지 선택 & 로그</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+<div class="container">
+    <!-- 왼쪽 패널: Docker 이미지 선택 -->
+    <div class="left-panel">
+        <div class="docker-icon">🐳</div>
+        <h1>온프레미스 설치 도우미</h1>
+        <p class="subtitle">설치할 기술을 선택하세요</p>
+
+        <form id="dockerForm">
+            <div class="form-group">
+                <label for="dockerImage">설치할 기술</label>
+                <select id="dockerImage" name="dockerImage">
+                    <option value="">-- 이미지를 선택하세요 --</option>
+                    <option value="postgres">PostgreSQL - 오픈소스 관계형 데이터베이스</option>
+                    <option value="mysql">MySQL - 인기있는 관계형 데이터베이스</option>
+                    <option value="mongodb">MongoDB - NoSQL 문서 데이터베이스</option>
+                    <option value="redis">Redis - 인메모리 데이터 저장소</option>
+                    <option value="nginx">Nginx - 웹 서버 및 리버스 프록시</option>
+                    <option value="node">Node.js - JavaScript 런타임</option>
+                    <option value="python">Python - 프로그래밍 언어</option>
+                    <option value="ubuntu">Ubuntu - Linux 운영체제</option>
+                    <option value="alpine">Alpine - 경량 Linux 배포판</option>
+                    <option value="elasticsearch">Elasticsearch - 검색 엔진</option>
+                    <option value="rabbitmq">RabbitMQ - 메시지 브로커</option>
+                    <option value="mariadb">MariaDB - MySQL 호환 데이터베이스</option>
+                </select>
+            </div>
+
+            <button type="submit" id="startBtn">실행하기</button>
+            <button type="button" class="btn-stop" id="stopBtn" disabled>중지하기</button>
+            <button type="button" class="btn-clear" id="clearBtn">로그 지우기</button>
+        </form>
+
+        <div id="selectedInfo" class="selected-info" style="display: none;">
+            <h3>✅ 선택된 이미지</h3>
+            <p id="selectedText"></p>
+        </div>
+    </div>
+
+    <!-- 오른쪽 패널: 로그 -->
+    <div class="right-panel">
+        <div class="log-header">
+            <h2>📋 실시간 로그</h2>
+            <div class="connection-status">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">연결 대기 중...</span>
+            </div>
+        </div>
+        <div class="log-container" id="logContainer">
+            <div class="log-empty">
+                Docker 이미지를 선택하고 실행하면<br>
+                여기에 실시간 로그가 표시됩니다.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/index.js">
+</script>
+</body>
+</html>

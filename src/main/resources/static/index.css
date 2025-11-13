@@ -1,0 +1,300 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1e1e1e;
+    color: #e0e0e0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* 왼쪽 패널 - Docker 선택 */
+.left-panel {
+    width: 400px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 30px;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.docker-icon {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 13px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+select:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+select:focus {
+    outline: none;
+    border-color: white;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: white;
+    color: #667eea;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-stop {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-clear {
+    background: #6c757d;
+    color: white;
+}
+
+.selected-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid white;
+}
+
+.selected-info h3 {
+    color: white;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.selected-info p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.selected-info code {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    color: #fff;
+}
+
+/* 오른쪽 패널 - 로그 */
+.right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #1e1e1e;
+}
+
+.log-header {
+    padding: 20px 30px;
+    background: #2d2d2d;
+    border-bottom: 1px solid #3d3d3d;
+}
+
+.log-header h2 {
+    color: #e0e0e0;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.connection-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #888;
+}
+
+.status-dot.connected {
+    background: #28a745;
+    box-shadow: 0 0 8px #28a745;
+}
+
+.status-dot.error {
+    background: #dc3545;
+    box-shadow: 0 0 8px #dc3545;
+}
+
+.log-container {
+    flex: 1;
+    padding: 20px 30px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.log-entry {
+    padding: 8px 12px;
+    margin-bottom: 4px;
+    border-left: 3px solid transparent;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.log-entry.info {
+    color: #4fc3f7;
+    border-left-color: #4fc3f7;
+    background: rgba(79, 195, 247, 0.05);
+}
+
+.log-entry.success {
+    color: #81c784;
+    border-left-color: #81c784;
+    background: rgba(129, 199, 132, 0.05);
+}
+
+.log-entry.warning {
+    color: #ffb74d;
+    border-left-color: #ffb74d;
+    background: rgba(255, 183, 77, 0.05);
+}
+
+.log-entry.error {
+    color: #e57373;
+    border-left-color: #e57373;
+    background: rgba(229, 115, 115, 0.05);
+}
+
+.log-entry.system {
+    color: #9575cd;
+    border-left-color: #9575cd;
+    background: rgba(149, 117, 205, 0.05);
+}
+
+.log-timestamp {
+    color: #666;
+    margin-right: 10px;
+}
+
+.log-empty {
+    text-align: center;
+    color: #666;
+    padding: 40px;
+    font-size: 14px;
+}
+
+/* 스크롤바 스타일 */
+.log-container::-webkit-scrollbar,
+.left-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.log-container::-webkit-scrollbar-track,
+.left-panel::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+.log-container::-webkit-scrollbar-thumb,
+.left-panel::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+.log-container::-webkit-scrollbar-thumb:hover,
+.left-panel::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-panel {
+        width: 100%;
+        height: 50vh;
+    }
+
+    .right-panel {
+        height: 50vh;
+    }
+}
