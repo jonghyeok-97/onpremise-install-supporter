@@ -62,7 +62,7 @@ class LocalFileStoreTest {
     }
 
     @Test
-    void storeImageNames() throws IOException {
+    void storeImage() {
         LocalFileStore localFileStore = new LocalFileStore(filePath.toString());
 
         List<DockerImage> githubImages = List.of(
@@ -73,7 +73,7 @@ class LocalFileStoreTest {
 
         localFileStore.store(githubImages);
 
-        assertThat(Files.readString(filePath)).isEqualTo("name=Nginx,Redis,Tomcats");
+        assertThat(githubImages).isEqualTo(localFileStore.getDockerImages());
         assertThat(filePath).exists();
     }
 }

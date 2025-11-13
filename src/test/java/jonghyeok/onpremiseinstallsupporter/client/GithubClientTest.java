@@ -26,7 +26,7 @@ public class GithubClientTest {
 
         assertThat(githubImages).isNotEmpty();
 
-        logger.info("이미지 개수 : {}", githubImages.size());
+        logger.debug("이미지 개수 : {}", githubImages.size());
         githubImages.forEach(each -> {
             logger.debug(each.toString());
         });

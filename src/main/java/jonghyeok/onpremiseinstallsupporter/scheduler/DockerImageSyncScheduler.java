@@ -25,12 +25,7 @@ public class DockerImageSyncScheduler {
         log.info("도커 이미지 싱크 스케쥴 시작");
         List<DockerImage> githubImages = githubClient.getAllDockerImages();
 
-        try {
-            imageStore.store(githubImages);
-        } catch (IOException ex) {
-            log.error("도커 이미지 캐싱 중 에러 발생: {}", ex.getMessage(), ex);
-        }
-
+        imageStore.store(githubImages);
         log.info("도커 이미지 싱크 스케쥴 종료. 이미지 개수: {}", githubImages.size());
     }
 }
