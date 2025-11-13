@@ -26,7 +26,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @SpringBootTest
 @ActiveProfiles(value = "test")
 @AutoConfigureWireMock(port = GithubClientMockTest.RANDOM_PORT)
-@TestPropertySource(properties = "github.url=http://localhost:${wiremock.server.port}")
+@TestPropertySource(properties = "docker-sync.github.url=http://localhost:${wiremock.server.port}")
 public class GithubClientMockTest {
     static final int RANDOM_PORT = 0;
 

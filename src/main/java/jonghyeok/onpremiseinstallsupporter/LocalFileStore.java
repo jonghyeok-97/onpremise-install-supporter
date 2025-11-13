@@ -17,14 +17,14 @@ public class LocalFileStore implements DockerImageStore {
 
     private final String filePath;
 
-    public LocalFileStore(@Value("${image.path.file}") String filePath) {
+    public LocalFileStore(@Value("${docker-sync.file.path}") String filePath) {
         this.filePath = filePath;
     }
 
     @Override
     public void store(List<DockerImage> images) throws IOException {
         if(!StringUtils.hasText(filePath)) {
-            throw new IllegalArgumentException("image.path.file should has text");
+            throw new IllegalArgumentException("docker-sync.file.path should has text");
         }
 
         List<String> imageNames = images.stream()

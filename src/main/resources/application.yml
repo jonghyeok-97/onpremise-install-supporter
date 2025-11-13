@@ -13,9 +13,11 @@ logging:
   level:
     jonghyeok.onpremiseinstallsupporter: DEBUG
 
-image:
-  path:
-    file: ./images  # /app/data
+docker-sync:
+  enabled: true
+  schedule:
+    cron: 0 0 0 1 * ?
+  file.path: ./images # /app/data
+  github.url: https://api.github.com
 
-github:
-  url: https://api.github.com
+
