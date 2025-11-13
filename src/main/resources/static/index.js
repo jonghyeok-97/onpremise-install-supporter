@@ -160,6 +160,58 @@ window.addEventListener('beforeunload', () => {
     }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    // loadOSSelectBox();
+    loadImageSelectBox();
+})
+
+const loadImageSelectBox = async () => {
+    const selectElement = document.getElementById('dockerImage');
+    const images = await fetchJsonData('GET', '/api/docker/images', null);
+    if (images.length === 0) {
+        addLog('설치 가능한 기술이 없습니다.', 'warning');
+        return;
+    }
+
+    // 셀렉트 박스에 추가
+    images.forEach(image => {
+        const option = document.createElement('option');
+        option.value = image.name;
+        option.textContent = image.name;
+        selectElement.appendChild(option);
+    });
+}
+
+const fetchJsonData = async (method, url, param) => {
+    try {
+        const options = {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        // GET 요청이면 query string으로, 아니면 body에 추가
+        if (method === 'GET' && param) {
+            const queryString = new URLSearchParams(param).toString();
+            url = `${url}?${queryString}`;
+        } else if (method !== 'GET' && param) {
+            options.body = JSON.stringify(param);
+        }
+
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('fetch 실패 ', error);
+        addLog(`에러: ${error.message}`, 'error');
+    }
+}
+
 // 데모를 위한 시뮬레이션 (실제 서버 없을 때)
 // 아래 코드는 서버가 준비되면 삭제하세요
 function simulateSSE(imageName) {
