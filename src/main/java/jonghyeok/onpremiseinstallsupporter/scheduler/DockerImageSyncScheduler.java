@@ -1,5 +1,7 @@
-package jonghyeok.onpremiseinstallsupporter;
+package jonghyeok.onpremiseinstallsupporter.scheduler;
 
+import jonghyeok.onpremiseinstallsupporter.DockerImage;
+import jonghyeok.onpremiseinstallsupporter.client.GithubClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

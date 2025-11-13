@@ -1,4 +1,6 @@
-package jonghyeok.onpremiseinstallsupporter;
+package jonghyeok.onpremiseinstallsupporter.scheduler;
+
+import jonghyeok.onpremiseinstallsupporter.DockerImage;
 
 import java.io.IOException;
 import java.util.List;

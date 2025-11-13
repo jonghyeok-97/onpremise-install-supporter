@@ -1,4 +1,4 @@
-package jonghyeok.onpremiseinstallsupporter;
+package jonghyeok.onpremiseinstallsupporter.client;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.http.Fault;
@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.time.Duration;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static jonghyeok.onpremiseinstallsupporter.GlobalFeignClientConfig.FEIGN_RETRY_MAX_ATTEMPTS;
+import static jonghyeok.onpremiseinstallsupporter.client.GlobalFeignClientConfig.FEIGN_RETRY_MAX_ATTEMPTS;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

@@ -1,4 +1,4 @@
-package jonghyeok.onpremiseinstallsupporter;
+package jonghyeok.onpremiseinstallsupporter.client;
 
 import feign.RetryableException;
 import feign.Retryer;

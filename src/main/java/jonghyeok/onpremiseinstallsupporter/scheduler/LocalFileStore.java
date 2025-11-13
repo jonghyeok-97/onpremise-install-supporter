@@ -1,5 +1,6 @@
-package jonghyeok.onpremiseinstallsupporter;
+package jonghyeok.onpremiseinstallsupporter.scheduler;
 
+import jonghyeok.onpremiseinstallsupporter.DockerImage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;

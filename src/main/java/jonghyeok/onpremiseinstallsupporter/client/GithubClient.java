@@ -1,5 +1,6 @@
-package jonghyeok.onpremiseinstallsupporter;
+package jonghyeok.onpremiseinstallsupporter.client;
 
+import jonghyeok.onpremiseinstallsupporter.DockerImage;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 

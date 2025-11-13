@@ -1,5 +1,6 @@
-package jonghyeok.onpremiseinstallsupporter;
+package jonghyeok.onpremiseinstallsupporter.client;
 
+import jonghyeok.onpremiseinstallsupporter.DockerImage;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

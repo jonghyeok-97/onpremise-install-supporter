@@ -1,4 +1,4 @@
-package jonghyeok.onpremiseinstallsupporter;
+package jonghyeok.onpremiseinstallsupporter.client;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import feign.Retryer;
