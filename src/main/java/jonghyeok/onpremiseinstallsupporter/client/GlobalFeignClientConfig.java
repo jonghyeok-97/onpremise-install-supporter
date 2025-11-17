@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-@EnableFeignClients(basePackageClasses = GithubClient.class) // 해당 클래스의 패키지만 스캔
+@EnableFeignClients
 public class GlobalFeignClientConfig {
     public static final int FEIGN_RETRY_MAX_ATTEMPTS = 3;
 

@@ -16,6 +16,20 @@
 
         <form id="dockerForm">
             <div class="form-group">
+                <label for="osName">OS</label>
+                <select id="osName" name="osName">
+                    <option value="">-- OS를 선택하세요 --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="osVersion">OS 버전</label>
+                <select id="osVersion" name="osVersion">
+                    <option value="">-- OS 버전을 선택하세요 --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="dockerImage">설치할 기술</label>
                 <select id="dockerImage" name="dockerImage">
                     <option value="">-- 이미지를 선택하세요 --</option>

@@ -161,9 +161,26 @@ window.addEventListener('beforeunload', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // loadOSSelectBox();
+    loadOsNameSelectBox();
     loadImageSelectBox();
 })
+
+const loadOsNameSelectBox = async () => {
+    const selectElement = document.getElementById('osName');
+    const osList = await fetchJsonData('GET', '/api/docker/os', null);
+    if (osList.length === 0) {
+        addLog('지원 가능한 OS가 없습니다.', 'warning');
+        return;
+    }
+
+    // 셀렉트 박스에 추가
+    osList.forEach(os => {
+        const option = document.createElement('option');
+        option.value = os;
+        option.textContent = os;
+        selectElement.appendChild(option);
+    });
+}
 
 const loadImageSelectBox = async () => {
     const selectElement = document.getElementById('dockerImage');

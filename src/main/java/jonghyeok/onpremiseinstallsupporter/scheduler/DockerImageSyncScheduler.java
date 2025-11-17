@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -20,6 +19,9 @@ public class DockerImageSyncScheduler {
     private final GithubClient githubClient;
     private final DockerImageStore imageStore;
 
+    /**
+     * NOTE: Auto Config의 스케줄 용 쓰레드는 1개, 우아한 종료 미지원. TaskSchedulingProperties 참고
+     */
     @Scheduled(cron = "${docker-sync.schedule.cron}", zone = "Asia/Seoul")
     public void syncImages() {
         log.info("도커 이미지 싱크 스케쥴 시작");
